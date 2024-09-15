@@ -14,10 +14,9 @@ function PostForm({
     const [loader, setLoader] = useState(false)
 
     const [title, setTitle] = useState()
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState()
     const [content, setContent] = useState('')
-    const [buttonDisabled, setButtonDisabled] = useState(false)
-
+    const [buttonDisabled, setButtonDisabled] = useState(true)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -30,6 +29,9 @@ function PostForm({
         formData.append("author", userId)
         formData.append('file', image);
 
+        // console.log(image);
+
+
         try {
             const post = await axios.post(
                 "/api/v1/posts/createpost",
@@ -40,10 +42,10 @@ function PostForm({
                     }
                 }
             )
-            console.log(post)
+            // console.log(post)
             toast.success(post.data.message)
         } catch (error) {
-            console.log(error.response.data)
+            // console.log(error.response.data)
             toast.error(error.response.data.error)
         }
 
@@ -51,7 +53,7 @@ function PostForm({
     }
 
     const handleFile = (e) => {
-
+        // console.log(e.target.files[0])
         setImage(e.target.files[0])
         setButtonDisabled(false)
 
@@ -86,7 +88,7 @@ function PostForm({
 
                     </div>
 
-                    <Loader color={"#ffd400"} active={loader}/>
+                    <Loader color={"#ffd400"} active={loader} />
 
                 </div> : null
 

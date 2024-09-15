@@ -9,7 +9,7 @@ const createPost = asyncHandler(async function (req, res) {
     const { title, content, author } = req.body
     const postImage = req.file
 
-    // if (!postImage) throw new ApiError(400, "image is required")
+    if (!postImage) throw new ApiError(400, "image is required")
 
     // check if any of the fields are empty
     if ([title, content, author].some((field) => field?.trim() === "")) {
@@ -21,15 +21,18 @@ const createPost = asyncHandler(async function (req, res) {
     if (!authorOfPost) throw new ApiError(401, "Unauthorized Request")
 
     // upload image
-    // const img = await uploadOnCloudinary(req.file.path)
-    // if (!img) throw new ApiError(400, "error in uploading image")
+    const img = await uploadOnCloudinary(req.file.path)
+    console.log(img)
+    if (!img) throw new ApiError(400, "error in uploading image")
+
+    console.log("img url", img.url)
 
     // create a post
     const createdPost = await Post.create({
         title,
         content,
         author,
-        // postImage: img.url
+        postImage: img.url
     })
 
     // if post is not created successfully
@@ -47,7 +50,7 @@ const updatePost = asyncHandler(async function (req, res) {
     const { title, content, postId } = req.body
 
 
-    // if([title, content, postId].some(field => field?.trim() === "")) throw new ApiError(401, "all fields are required")
+    if ([title, content, postId].some(field => field?.trim() === "")) throw new ApiError(401, "all fields are required")
 
     // find Post
     const post = await Post.findById(postId)
@@ -65,7 +68,7 @@ const updatePost = asyncHandler(async function (req, res) {
             }
         }
     )
-    console.log(updatedPost);
+    // console.log(updatedPost);
 
 
     res.status(200).json(updatedPost)
@@ -77,19 +80,21 @@ const searchPost = asyncHandler(async function (req, res) {
     const name = req.query.q
 
     const post = await Post.find({
-        title: {$regex: name, $options: 'i'}
-    }).populate({path: "author", select: "-_id username"})
+        title: { $regex: name, $options: 'i' }
+    }).populate({ path: "author", select: "-_id username" })
 
-    if(!post) res.status(404).json({message: "Post Not Found"})
+    if (!post) res.status(404).json({ message: "Post Not Found" })
 
     res.status(200).json(post)
 })
 
 const deleteImage = asyncHandler(async function (req, res) {
     const { id } = req.params
+    // console.log(id);
+    
 
     const result = await deleteCloudinary(id)
-    console.log("result", result);
+    // console.log("result", result);
 
 
     res.send("done")
@@ -146,13 +151,13 @@ const likePost = asyncHandler(async function (req, res) {
 // function to delete a post
 const deletePost = asyncHandler(async function (req, res) {
     const { id } = req.params
-    const {_id} = req.user
+    const { _id } = req.user
 
     const post = await Post.findByIdAndDelete(id)
 
     const user = await User.findById(_id)
     user.posts = user.posts.filter(pId => pId != id)
-    user.save({validateBeforeSave: false})
+    user.save({ validateBeforeSave: false })
 
     return res.status(200).json({ message: "Deletetd Successfully", data: post })
 })

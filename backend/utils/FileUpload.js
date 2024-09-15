@@ -1,6 +1,8 @@
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
+import dotenv from "dotenv";
 
+dotenv.config()
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -9,15 +11,18 @@ cloudinary.config({
     secure: true
 })
 
+
+
 const uploadOnCloudinary = async (localFilePath) => {
     try {
         if (!localFilePath) return null
-
+        console.log("working")
         const response = await cloudinary.uploader.upload(localFilePath,
-            { invalidate: true },
+            {invalidate: true},
             {
                 transformation: { width: 280, height: 173, crop: "auto" }
-            })
+            }
+        )
         console.log("file is uploaded", response.url);
         fs.unlinkSync(localFilePath)
         return response;
