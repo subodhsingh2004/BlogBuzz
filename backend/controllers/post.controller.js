@@ -22,10 +22,10 @@ const createPost = asyncHandler(async function (req, res) {
 
     // upload image
     const img = await uploadOnCloudinary(req.file.path)
-    console.log(img)
+    // console.log(img)
     if (!img) throw new ApiError(400, "error in uploading image")
 
-    console.log("img url", img.url)
+    // console.log("img url", img.url)
 
     // create a post
     const createdPost = await Post.create({

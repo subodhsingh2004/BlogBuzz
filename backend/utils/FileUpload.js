@@ -18,9 +18,9 @@ const uploadOnCloudinary = async (localFilePath) => {
         if (!localFilePath) return null
         console.log("working")
         const response = await cloudinary.uploader.upload(localFilePath,
-            {invalidate: true},
             {
-                transformation: { width: 280, height: 173, crop: "auto" }
+                transformation: { width: 280, height: 173, crop: "auto" },
+                invalidate: true
             }
         )
         console.log("file is uploaded", response.url);
