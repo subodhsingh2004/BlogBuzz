@@ -19,12 +19,12 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: [true, "Password is required"],
-        // validate: {
-        //     validator: function (v) {
-        //         return v.length >= 8;
-        //     },
-        //     message: 'Password length must be 8'
-        // }
+        validate: {
+            validator: function (v) {
+                return v.length >= 8;
+            },
+            message: 'Password length must be 8'
+        }
     },
     profileImage: {
         type: String

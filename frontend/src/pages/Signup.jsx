@@ -32,7 +32,10 @@ function Signup() {
           }
         })
 
-      console.log(user.data);
+      if(user){
+        toast.success("User registered successfully")
+        navigate('/login')
+      }
       
     } catch (error) {
       console.log(error.response.data)
