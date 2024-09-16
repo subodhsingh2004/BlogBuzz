@@ -124,9 +124,9 @@ function FullPost() {
                 }
             )
 
-            if (commentRes.statusText === "OK") {
-                loadComments()
+            if (commentRes) {
                 setComment('');
+                loadPost()
                 toast.success(commentRes.data.message)
             }
         } catch (error) {
@@ -276,7 +276,7 @@ function FullPost() {
 
 
                         {/* Comment Section */}
-                        <div className='flex w-full flex-col space-y-2'>
+                        <div className='flex w-full flex-col space-y-2 pb-10'>
                             <h2 className='text-left font-[poppins] text-[24px] font-medium text-[#011627]'>Comments</h2>
 
                             {/* Comment Form */}
