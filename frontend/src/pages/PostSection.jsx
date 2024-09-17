@@ -27,7 +27,7 @@ function PostSection() {
 
 
     const loadData = useCallback(async () => {
-        if (isLogin) {
+        if (isLogin && !postFromSessionStorage) {
             console.log("loaded")
             setLoading(true)
             try {
