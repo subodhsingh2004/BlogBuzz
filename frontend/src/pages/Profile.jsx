@@ -5,7 +5,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FolderIcon from '@mui/icons-material/Folder';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { logout } from '../store/AuthSlice';
+import { logout } from '../slices/AuthSlice';
 
 function Profile() {
   const navigate = useNavigate()

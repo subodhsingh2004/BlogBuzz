@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { login, logout } from '../store/AuthSlice';
+import { login, logout } from '../slices/AuthSlice';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
@@ -48,14 +48,14 @@ function Navbar() {
 
     return (
         <>
-            <nav className='w-full h-[8vh] fixed z-10 bg-[#2667ff] backdrop-blur-md bg-opacity-60 flex items-center justify-between px-3 sm:px-5 border-black border-b-[1px]'>
+            <nav className='w-full h-[8vh] fixed z-10 bg-transparent backdrop-blur-md bg-opacity-60 flex items-center justify-between px-3 sm:px-5 shadow-sm shadow-black border-none'>
 
 
                 {
                     isLogin ? <button className='hidden sm:flex flex-col text-red-600 text-[16px] sm:text-[20px]  font-[poppins] font-medium text-left'>
-                        <h4 className='text-black text-lg leading-5'>Welcome</h4>
+                        <h4 className='text-white text-lg leading-5'>Welcome</h4>
                         <Link to={`/profile/${user.username}`}>
-                            <h2 className='leading-4 text-[22px] text-[#f8f8fe]'>{user && user.username}</h2>
+                            <h2 className='leading-4 text-[22px] text-[#3772ff]'>{user && user.username}</h2>
                         </Link>
                     </button>
                         : null
@@ -76,10 +76,10 @@ function Navbar() {
                                     </div> : null
                             } */}
 
-                            <button onClick={handleLogout} className='hidden sm:block font-[montserrat] rounded-full font-medium bg-[#011627] px-4 py-2 text-[#f7f7f9]'>
+                            <button onClick={handleLogout} className='hidden sm:block font-[montserrat] rounded-full font-medium bg-[#d7f9ff] px-4 py-1 text-black'>
                                 Logout
                             </button>
-                        </div> : <button onClick={() => navigate('/login')} className='font-[montserrat] rounded-full font-medium bg-[#011627] px-4 py-2 text-[#f7f7f9]'>
+                        </div> : <button onClick={() => navigate('/login')} className='font-[montserrat] rounded-full font-medium bg-[#d7f9ff] px-4 py-1 text-black'>
                             Login
                         </button>
                 }

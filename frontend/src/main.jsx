@@ -64,7 +64,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <ToastContainer 
       hideProgressBar
       position='top-center'
-      autoClose={1200}
+      autoClose={2500}
       transition={Slide}
       theme='dark'/>
     </Provider>
