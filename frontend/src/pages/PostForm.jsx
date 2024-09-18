@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import Loader from '../components/Loader'
+import { addPosts } from '../slices/PostsSlice'
 
 function PostForm({
     active, setActive, onClose, Submit,
 }) {
 
+    const dispatch = useDispatch()
     const user = useSelector(state => state.auth.userData)
     let userId = user && user._id || null
 
@@ -42,7 +44,7 @@ function PostForm({
                     }
                 }
             )
-            // console.log(post)
+            dispatch(addPosts(post.data))
             toast.success(post.data.message)
         } catch (error) {
             // console.log(error.response.data)

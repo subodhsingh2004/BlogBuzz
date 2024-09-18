@@ -27,7 +27,7 @@ function PostSection() {
 
 
     const loadData = useCallback(async () => {
-        if (isLogin && !postFromSessionStorage) {
+        if (isLogin && post.length == 0) {
             console.log("loaded")
             setLoading(true)
             try {
@@ -44,7 +44,7 @@ function PostSection() {
 
     useEffect(() => {
         loadData();
-        console.log("render");
+        // console.log("render");
     }, [loadData])
 
     const filterdItems = post.filter(p => p.title.toLowerCase().includes(query.toLowerCase()))

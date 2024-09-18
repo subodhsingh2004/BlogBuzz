@@ -22,10 +22,10 @@ const createPost = asyncHandler(async function (req, res) {
 
     // upload image
     const img = await uploadOnCloudinary(req.file.path)
-    // console.log(img)
+
     if (!img) throw new ApiError(400, "error in uploading image")
 
-    // console.log("img url", img.url)
+
 
     // create a post
     const createdPost = await Post.create({
@@ -68,7 +68,7 @@ const updatePost = asyncHandler(async function (req, res) {
             }
         }
     )
-    // console.log(updatedPost);
+
 
 
     res.status(200).json(updatedPost)
@@ -90,12 +90,8 @@ const searchPost = asyncHandler(async function (req, res) {
 
 const deleteImage = asyncHandler(async function (req, res) {
     const { id } = req.params
-    // console.log(id);
     
-
     const result = await deleteCloudinary(id)
-    // console.log("result", result);
-
 
     res.send("done")
 })
@@ -138,7 +134,6 @@ const likePost = asyncHandler(async function (req, res) {
     } else {
         post.likes = post.likes.filter(id => id.toString() !== userId)
         user.likedPosts = user.likedPosts.filter(id => id.toString() !== postId)
-        // console.log(post.likes);
     }
     await post.save({ validateBeforeSave: false })
 

@@ -30,7 +30,7 @@ app.use('/api/v1/users', userRouter)
 app.use('/api/v1/posts', postRouter)
 
 app.use((err, req, res, next) => {
-  // console.error(err.stack); 
+  // .error(err.stack); 
   res.status(err.statusCode || 500).json({ error: err.message })
 });
 

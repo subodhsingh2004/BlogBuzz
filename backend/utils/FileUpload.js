@@ -1,6 +1,7 @@
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 import dotenv from "dotenv";
+import { ApiError } from "./ApiError.js";
 
 dotenv.config()
 
@@ -16,19 +17,16 @@ cloudinary.config({
 const uploadOnCloudinary = async (localFilePath) => {
     try {
         if (!localFilePath) return null
-        console.log("working")
         const response = await cloudinary.uploader.upload(localFilePath,
             {
                 transformation: { width: 280, height: 173, crop: "auto" },
                 invalidate: true
             }
         )
-        console.log("file is uploaded", response.url);
         fs.unlinkSync(localFilePath)
         return response;
 
     } catch (error) {
-        console.log(error.message)
         fs.unlinkSync(localFilePath)
         return null;
     }
@@ -37,9 +35,8 @@ const uploadOnCloudinary = async (localFilePath) => {
 const deleteCloudinary = async (id) => {
     try {
         const response = await cloudinary.uploader.destroy(id, { invalidate: true })
-        console.log(response)
     } catch (error) {
-        console.log(error)
+        throw new ApiError(400, error.message)
     }
 }
 

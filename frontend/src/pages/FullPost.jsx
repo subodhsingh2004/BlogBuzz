@@ -42,7 +42,7 @@ function FullPost() {
 
     // logged in user details
     const user = useSelector((state => state.auth.userData))
-    // console.log(user.name);
+    // console.log()(user.name);
 
     // get post
     const loadPost = useCallback( async () => {
@@ -60,10 +60,10 @@ function FullPost() {
 
             if (post.data.likes.includes(user._id)) setIsLiked(true)
         } catch (error) {
-            console.log(error)
+            // console.log()(error)
         }
 
-        // console.log(postDetails);
+        // console.log()(postDetails);
     },[])
 
     // get comments
@@ -71,13 +71,13 @@ function FullPost() {
         try {
 
             const AllComments = await axios.get(`/api/v1/posts/${id.id}/all-comments`)
-            console.log(AllComments.data.comments);
+            // console.log(AllComments.data.comments);
 
             setPostDetails((prev) => ({
                 ...prev, comments: [...AllComments.data.comments]
             }))
         } catch (error) {
-            console.log(error)
+            // console.log(error)
         }
     }
 
@@ -171,7 +171,7 @@ function FullPost() {
                 url: window.location.href,
             }).then(() => {
                 toast.info("Thanks for Sharing")
-            }).catch(console.error);
+            }).catch(error);
         }
     }
 

@@ -56,7 +56,7 @@ function UserPosts() {
                         <h1 className='text-center text-white font-[poppins] text-[30px]'>{heading}</h1>
 
                         {
-                            PostsInfo.length > 0 ? <div className='w-[70%] sm:w-[90%] h-auto flex flex-wrap justify-center items-center gap-8'>
+                            PostsInfo.length > 0 ? <div className='w-[70%] sm:w-[40%] h-auto gap-8'>
                                 {PostsInfo.map((p) => (
                                     <Card key={p._id} id={p._id} imageURL={p.postImage} title={p.title} authorName={p.author.username} createdDate={p.createdAt} likesCount={p.likes.length} />
                                 ))}

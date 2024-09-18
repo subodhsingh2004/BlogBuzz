@@ -82,7 +82,6 @@ const logoutUser = asyncHandler(async function (req, res) {
 // Get user Details
 const getCurrentUser = asyncHandler(async function (req, res) {
 
-    // console.log(req.user)
     const user = req.user
 
     const userinfo = await User.findById(user._id).select("-password -refreshToken").populate("posts likedPosts savedPosts")
@@ -108,7 +107,6 @@ const getLikedPosts = asyncHandler(async function(req, res) {
 
     // find user 
     const user = await User.findById(_id).populate({path: "likedPosts", populate:{path: "author", select: "username"}}).select("likedPosts")
-    // console.log(user);
     
     if(!user) throw new ApiError(404, "something went wrong")
 

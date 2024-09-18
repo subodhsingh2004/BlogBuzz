@@ -24,11 +24,11 @@ function Navbar() {
         try {
             const userDetails = await axios.get("/api/v1/users/get-current-user")
             if (userDetails) {
-                // console.log(userDetails.data);
+                // console.log()(userDetails.data);
                 dispatch(login(userDetails.data))
             }
         } catch (error) {
-            console.log(error.response.data)
+            // console.log()(error.response.data)
         }
     }
     const handleClick = () => {
