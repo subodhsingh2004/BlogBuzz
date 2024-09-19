@@ -6,7 +6,7 @@ const getPostsFromSessionStorage = () => {
 }
 
 const initialState = {
-    postsData: getPostsFromSessionStorage()
+    postsData: [...getPostsFromSessionStorage()]
 }
 
 const postSlice = createSlice({
@@ -20,12 +20,19 @@ const postSlice = createSlice({
             sessionStorage.setItem("Post", JSON.stringify(action.payload))
         },
         addPosts: (state, action) => {
-            state.postsData.unshift = action.payload
+            console.log(action.payload.post);
+            
+            state.postsData.unshift(action.payload.post)
             sessionStorage.setItem("Post", JSON.stringify(state.postsData))
-
+            
+            console.log(state.postsData)
+        },
+        deletePost: (state, action) => {
+            state.postsData = state.postsData.filter(p => p._id != action.payload)
+            sessionStorage.setItem("Post", JSON.stringify(state.postsData))
         }
     }
 })
 
-export const { setPosts, addPosts } = postSlice.actions
+export const { setPosts, addPosts, deletePost } = postSlice.actions
 export default postSlice.reducer

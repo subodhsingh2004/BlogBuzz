@@ -12,6 +12,7 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import { toast } from 'react-toastify'
 import { parseISO, formatDistanceToNow } from 'date-fns';
 import UpdateForm from './UpdateForm'
+import { deletePost } from '../slices/PostsSlice'
 
 
 function FullPost() {
@@ -85,6 +86,7 @@ function FullPost() {
     const handleLike = async () => {
 
         const likeStatus = !isLiked
+        isLiked ? setNumberOfLikes(prev => prev-=1) : setNumberOfLikes(prev => prev+=1)
         setIsLiked(likeStatus)
 
         try {
@@ -99,7 +101,6 @@ function FullPost() {
                 }
             )
 
-            setNumberOfLikes(like.data.length)
             // to save changes
 
 
@@ -148,6 +149,7 @@ function FullPost() {
             )
             console.log(res)
             if (res) {
+                dispatch(deletePost(res.data._id))
                 navigate('/')
                 toast.success("Deleted Successfully")
             }
@@ -159,7 +161,6 @@ function FullPost() {
     const dateFn = (createdDate) => {
         const date = parseISO(createdDate)
         return formatDistanceToNow(date, { addSuffix: true })
-        format
     }
 
 

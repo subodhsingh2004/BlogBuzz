@@ -48,25 +48,23 @@ function Profile() {
 
   return (
     <>
-      <div className='w-full h-[92vh] absolute mt-[8vh] bg-[#212121]'>
+      <div className='w-full h-[92vh] absolute mt-[8vh] bg-[#121212]'>
 
-        <button onClick={() => (navigate('/'))} className=' hidden fixed text-3xl ml-5 mt-5 bg-[#2667ff] rounded-full w-[40px] h-[40px] sm:flex justify-center'> <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="30px" fill="#dcdcdc"><path d="M359.33-241.33 120-480.67 359.33-720l47.34 47.33L248-514h592v66.67H248l158.67 158.66-47.34 47.34Z" /></svg> </button>
-
-        <div className='w-full mx-auto bg-[#011627] h-full sm:w-[70%] space-y-10'>
+        <div className='w-full mx-auto bg-[#121212] h-full sm:w-[70%] space-y-10'>
 
           <div className='flex sm:flex-row flex-col justify-center items-center'>
             {/* profile picture */}
             <div className='sm:w-1/2 w-full h-[200px] flex justify-center items-center '>
-              <div className='w-[150px] h-[150px] text-[50px] font-medium font-[poppins] bg-gray-500 rounded-full flex justify-center items-center'>
-                {user && user.username.charAt(0)}
+              <div className='w-[150px] h-[150px] text-[55px] font-bold font-[montserrat] bg-[#fafaf7] rounded-full flex justify-center items-center'>
+                {user && user.username.charAt(0).toUpperCase()}
               </div>
             </div>
             {/* profile name */}
-            <div className='sm:w-1/2 w-full leading-none  text-white h-auto flex justify-center items-center text-[36px] font-[poppins]'>{user && user.username}</div>
+            <div className='sm:w-1/2 w-full leading-none  text-[#fff94f] h-auto flex justify-center items-center text-[36px] font-[poppins]'>{user && user.username}</div>
           </div>
 
           <div className='w-full flex justify-center'>
-            <button onClick={handleLogout} className='font-[montserrat] rounded-full font-medium bg-[#ffd400] px-4 py-1 text-[#011627]'>
+            <button onClick={handleLogout} className='font-[poppins] rounded-full font-medium bg-[#d7f9ff] px-4 py-1 text-[#011627]'>
               Logout
             </button>
           </div>
@@ -74,7 +72,7 @@ function Profile() {
           <div className='w-full flex flex-wrap flex-col items-center sm:flex-row space-y-4'>
 
             <div className='w-full flex justify-center'>
-              <button onClick={handleMyPosts} className='bg-[#414b53] hover:bg-[#30373d] py-3 min-w-[300px] lg:w-[50%] px-4 space-x-2 rounded-xl flex items-center justify-between'>
+              <button onClick={handleMyPosts} className='bg-[#212121] hover:bg-[#313131] py-3 min-w-[300px] lg:w-[50%] px-4 space-x-2 rounded-xl flex items-center justify-between'>
                 <div className='flex space-x-2 items-center'>
                   <FolderIcon sx={{ color: "#ffd400", fontSize: "30px" }} />
                   <h1 className='font-[montserrat] text-xl font-medium text-white'>My Posts</h1>
@@ -84,7 +82,7 @@ function Profile() {
             </div>
 
             <div className='w-full flex justify-center'>
-              <button onClick={handleLikedPosts} className='bg-[#414b53] hover:bg-[#30373d] py-3 min-w-[300px] lg:w-[50%] px-4 space-x-2 rounded-xl flex items-center justify-between'>
+              <button onClick={handleLikedPosts} className='bg-[#212121] hover:bg-[#313131] py-3 min-w-[300px] lg:w-[50%] px-4 space-x-2 rounded-xl flex items-center justify-between'>
                 <div className='flex space-x-2 items-center'>
                   <FavoriteIcon sx={{ color: "#E91E63", fontSize: "30px" }} />
                   <h1 className='font-[montserrat] text-xl font-medium text-white'>Liked Posts</h1>

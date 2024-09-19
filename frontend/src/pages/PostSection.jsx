@@ -14,7 +14,9 @@ function PostSection() {
 
     const isLogin = useSelector(state => state.auth.status)
     const postFromSessionStorage = useSelector(state => state.posts.postsData)
-    
+    // console.log(postFromSessionStorage);
+
+
     // console.log(isLogin);
 
     const [query, setQuery] = useState('')
@@ -22,8 +24,14 @@ function PostSection() {
     const [boxStatus, setBoxStatus] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    const [post, setPost] = useState(postFromSessionStorage)
+    const [post, setPost] = useState([])
+
+    useEffect(() => {
+        setPost(postFromSessionStorage)
+    }, [postFromSessionStorage])
+
     // const img = "/images/img1.png"
+    // console.log(post);
 
 
     const loadData = useCallback(async () => {
@@ -67,12 +75,12 @@ function PostSection() {
                             </div>
                         </div>
 
-                        <div className='w-[100%] sm:w-[55%] h-auto gap-8 pt-10'>
+                        <div className='w-[100%] sm:w-[90%] h-auto grid md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-5 px-2 pt-10'>
                             {filterdItems.length > 0 ? filterdItems.map((p) => (
                                 <Card key={p._id} id={p._id} imageURL={p.postImage} title={p.title} authorName={p.author.username} createdDate={p.createdAt} likesCount={p.likes.length} />
                             )) : <h1 className='text-white text-2xl font-[poppins]'>No Posts Found</h1>}
                         </div></div> : <h1 className='font-[poppins] text-2xl text-white text-center'>No Post, be first to write a post</h1>
-                        : <h1 className='font-[poppins] text-2xl text-white text-center'>Please Login to see all Posts</h1>
+                        : <h1 className='font-[poppins] pt-2 text-2xl text-white text-center'>Please Login to see all Posts</h1>
                 }
 
                 {/* <SideBar /> */}

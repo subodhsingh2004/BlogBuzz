@@ -28,7 +28,6 @@ function Login() {
                         "Content-Type": "application/json"
                     }
                 })
-            console.log(user.data);
 
             if (user) {
                 setLoader(false)

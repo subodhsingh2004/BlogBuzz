@@ -18,7 +18,7 @@ function PostForm({
     const [title, setTitle] = useState()
     const [image, setImage] = useState()
     const [content, setContent] = useState('')
-    const [buttonDisabled, setButtonDisabled] = useState(true)
+    const [buttonDisabled, setButtonDisabled] = useState(false)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -44,14 +44,17 @@ function PostForm({
                     }
                 }
             )
+            console.log(post.data);
+            toast.success("post created successfully")
+            setLoader(false)
+            setActive(false)
             dispatch(addPosts(post.data))
-            toast.success(post.data.message)
+
         } catch (error) {
             // console.log(error.response.data)
-            toast.error(error.response.data.error)
+            toast.error(error)
         }
 
-        setActive(false)
     }
 
     const handleFile = (e) => {
@@ -75,7 +78,7 @@ function PostForm({
                         </div>
 
                         <form onSubmit={handleSubmit} className={`flex flex-col gap-6 mt-8`}>
-                            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Title' required className='text-[#3772ff] focus:outline-none font-[montserrat] px-2 py-1 text-[20px] bg-[#121212] border border-[#3772ff] rounded-md' />
+                            <input type="text"  onChange={(e) => setTitle(e.target.value)} placeholder='Title' required className='text-[#3772ff] focus:outline-none font-[montserrat] px-2 py-1 text-[20px] bg-[#121212] border border-[#3772ff] rounded-md' />
 
                             <textarea value={content} onChange={(e) => setContent(e.target.value)} className='rounded-md h-[150px] lg:h-[200px] bg-[#121212] border border-[#3772ff] px-2 py-1 font-[montserrat] text-white focus:outline-none' name="" id="" required placeholder='Write Something here .....' style={{ resize: 'none' }}></textarea>
 

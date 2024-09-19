@@ -28,21 +28,18 @@ function SideBar() {
                     {/* <h2 className='text-white font-[montserrat]'>Wanna write a Post ?</h2>
                         <button onClick={handleClick} className='bg-[#ffd400] px-2 rounded-full py-1 font-[poppins] text-sm text-[#011627] font-bold'>Click Here</button> */}
 
-                    <div className='fixed bottom-2 flex w-full justify-center'>
-                        <div className='mx-auto flex px-4 justify-between items-center bottom-2 z-10 w-auto space-x-5 bg-[#ffd400] backdrop-blur-sm bg-opacity-50 border border-[#121212] h-[45px] rounded-full shadow-black shadow-2xl'>
-                            <NavLink to={'/'} className={({ isActive }) =>
-                                `transition-transform  duration-200 hover:scale-110`}>
-                                {({ isActive }) => <HomeRoundedIcon sx={{ color: isActive ? "#000" : "#4a4a4a", fontSize: "30px" }} />}
+                    <div className='sm:hidden fixed bottom-0 h-[55px] bg-[#fafaf7] border-t border-t-[#fff94f] backdrop-blur-md bg-opacity-5 flex w-full justify-center items-center rounded-t-3xl'>
+                        <div className='mx-auto flex px-4 justify-evenly items-center bottom-2 z-10 w-full space-x-5  h-[45px] rounded-full '>
+                            <NavLink to={'/'}>
+                                {({ isActive }) => <div className='flex flex-col items-center'> <HomeRoundedIcon sx={{ color: isActive ? "#fff94f" : "#fafaf7", fontSize: "30px" }} /> <p className={`font-[poppins] leading-3 pt-1 ${isActive ? "text-[#fff94f]" : "text-[#fafaf7]"}`}>Home</p> </div>}
                             </NavLink>
 
-                            <button onClick={handleClick} className={
-                                `transition-transform  duration-200 hover:scale-110`}>
-                                <AddCircleOutlineRoundedIcon sx={{ color: popup ? "#000" : "#4a4a4a", fontSize: "30px" }} />
+                            <button onClick={handleClick}>
+                                <div className='flex flex-col items-center'> <AddCircleOutlineRoundedIcon sx={{ color: popup ? "#000" : "#fafaf7", fontSize: "30px" }} /> <p className='font-[poppins] leading-3 pt-1 text-[#fafaf7] text-sm'>Add Post</p> </div>
                             </button>
-                                
-                            <NavLink to={`/profile/${user.username}`} className={({ isActive }) =>
-                                `transition-transform  duration-200 hover:scale-110`}>
-                                {({ isActive }) => <AccountCircleRoundedIcon sx={{ color: isActive ? "#000" : "#4a4a4a", fontSize: "30px" }} />}
+
+                            <NavLink to={`/profile/${user.username}`}>
+                                {({ isActive }) => <div className='flex flex-col items-center'> <AccountCircleRoundedIcon sx={{ color: isActive ? "#fff94f" : "#fafaf7", fontSize: "30px" }} /> <p className={`font-[poppins] leading-3 pt-1 ${isActive ? "text-[#fff94f]" : "text-gray-400"}`}>Profile </p> </div>}
                             </NavLink>
                         </div>
                     </div>

@@ -35,14 +35,17 @@ const createPost = asyncHandler(async function (req, res) {
         postImage: img.url
     })
 
+
     // if post is not created successfully
     if (!createdPost) throw new ApiError(500, "Error in creating Post")
 
+    const post = await Post.findById(createdPost._id).populate({ path: "author", select: "username" })
+
     // add the id of post in the array of posts in user
-    authorOfPost.posts.push(createdPost._id)
+    authorOfPost.posts.unshift(createdPost._id)
     await authorOfPost.save({ validateBeforeSave: false })
 
-    return res.status(201).json({ message: "Post created successfully :)" })
+    return res.status(201).json({ post })
 })
 
 // function to updatePost
@@ -90,7 +93,7 @@ const searchPost = asyncHandler(async function (req, res) {
 
 const deleteImage = asyncHandler(async function (req, res) {
     const { id } = req.params
-    
+
     const result = await deleteCloudinary(id)
 
     res.send("done")
@@ -98,7 +101,7 @@ const deleteImage = asyncHandler(async function (req, res) {
 
 // function to see all the posts
 const allPosts = asyncHandler(async function (req, res) {
-    const posts = await Post.find().populate({ path: "author", select: "username -_id" })
+    const posts = await Post.find().populate({ path: "author", select: "username -_id" }).sort({ createdAt: -1 })
     return res.json(posts)
 })
 
@@ -150,6 +153,17 @@ const deletePost = asyncHandler(async function (req, res) {
 
     const post = await Post.findByIdAndDelete(id)
 
+    // delete post's image from cloudinary
+    // image id 
+    if (post.postImage) {
+        const imgId = post.postImage.slice(-24, -4);
+        const response = deleteCloudinary(imgId)
+
+        if(!response) throw new ApiError(400, "something went wrong")
+    }
+
+
+    // remove this post from user post array
     const user = await User.findById(_id)
     user.posts = user.posts.filter(pId => pId != id)
     user.save({ validateBeforeSave: false })

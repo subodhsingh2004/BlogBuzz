@@ -48,7 +48,7 @@ function Navbar() {
 
     return (
         <>
-            <nav className='w-full h-[8vh] fixed z-10 bg-transparent backdrop-blur-md bg-opacity-60 flex items-center justify-between px-3 sm:px-5 shadow-sm shadow-black border-none'>
+            <nav className='w-full h-[8vh] fixed z-10 bg-transparent backdrop-blur-md bg-opacity-60 flex items-center justify-between px-3 sm:px-5 shadow-sm shadow-black border-b border-b-gray-500'>
 
 
                 {
@@ -61,12 +61,12 @@ function Navbar() {
                         : null
                 }
 
-                <button onClick={handleClick}><h1 className='text-[24px] sm:text-[32px] font-[poppins] font-bold text-[#ffd400]'> BlogBuzz </h1></button>
+                <button onClick={handleClick}><h1 className='text-[24px] sm:text-[32px] font-[poppins] font-bold text-[#fff94f]'> BlogBuzz </h1></button>
 
                 {
                     isLogin ?
                         <div>
-                            <button onClick={handleProfileClick} className='sm:hidden text-[24px] bg-[#ffd400] text-[#011627] font-medium rounded-full w-[36px] h-[36px] flex justify-center items-center text-center font-[poppins]'><h2 className='mt-[2px]'>{user && user.username.charAt(0).toUpperCase()}</h2>
+                            <button onClick={handleProfileClick} className='sm:hidden text-[20px] bg-[#ffd400] text-[#011627] font-bold rounded-full w-[32px] h-[32px] flex justify-center items-center text-center font-[poppins]'><h2 className='mt-[2px]'>{user && user.username.charAt(0).toUpperCase()}</h2>
                             </button>
 
                             {/* {
