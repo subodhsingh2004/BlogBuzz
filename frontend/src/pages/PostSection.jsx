@@ -53,7 +53,7 @@ function PostSection() {
     useEffect(() => {
         loadData();
         // console.log("render");
-    }, [loadData])
+    }, [])
 
     const filterdItems = post.filter(p => p.title.toLowerCase().includes(query.toLowerCase()))
 
