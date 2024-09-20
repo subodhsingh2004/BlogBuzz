@@ -168,7 +168,7 @@ const deletePost = asyncHandler(async function (req, res) {
     user.posts = user.posts.filter(pId => pId != id)
     user.save({ validateBeforeSave: false })
 
-    return res.status(200).json({ message: "Deletetd Successfully", data: post })
+    return res.status(200).json(post)
 })
 
 // function to add comment

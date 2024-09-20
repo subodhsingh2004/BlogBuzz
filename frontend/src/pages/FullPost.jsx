@@ -46,7 +46,7 @@ function FullPost() {
     // console.log()(user.name);
 
     // get post
-    const loadPost = useCallback( async () => {
+    const loadPost = useCallback(async () => {
         try {
 
             const post = await axios.get(`/api/v1/posts/${id.id}`)
@@ -65,7 +65,7 @@ function FullPost() {
         }
 
         // console.log()(postDetails);
-    },[])
+    }, [])
 
     // get comments
     const loadComments = async () => {
@@ -86,7 +86,7 @@ function FullPost() {
     const handleLike = async () => {
 
         const likeStatus = !isLiked
-        isLiked ? setNumberOfLikes(prev => prev-=1) : setNumberOfLikes(prev => prev+=1)
+        isLiked ? setNumberOfLikes(prev => prev -= 1) : setNumberOfLikes(prev => prev += 1)
         setIsLiked(likeStatus)
 
         try {
@@ -147,7 +147,6 @@ function FullPost() {
                     }
                 }
             )
-            console.log(res)
             if (res) {
                 dispatch(deletePost(res.data._id))
                 navigate('/')
@@ -206,7 +205,7 @@ function FullPost() {
                                         className='w-full rounded-lg' />
                                 </div>
 
-                                <div className='h-full mt-5 flex flex-row lg:flex-col flex-1 items-center justify-center'>
+                                <div className='h-full mt-5 flex flex-row lg:flex-col flex-1 items-center justify-center space-x-2 sm:space-x-0'>
                                     <div className='flex flex-row lg:flex-col gap-4'>
                                         <div className='text-center flex flex-col items-center justify-center w-full hover:bg-[#313131] px-1 rounded-md space-y-2 py-1 duration-200 cursor-pointer'>
                                             <div className='rounded-full w-[50px] flex justify-center items-center'>
@@ -262,12 +261,12 @@ function FullPost() {
                         </div>
                     </div>
 
-                    <div className='w-full md:w-[40%] lg:h-[90vh]  flex flex-col p-2 sm:py-5 sm:px-10'>
+                    <div className='w-full md:w-[40%] lg:h-[90vh] flex flex-col p-2 pb-16 sm:pb-0 sm:py-5 sm:px-10'>
                         <div className='flex flex-1 flex-col space-y-5'>
                             <h2 className='text-left font-[poppins] text-[24px] font-medium text-[#d7f9ff]'>Comments</h2>
 
                             <form onSubmit={handleComment} className='flex w-full space-x-4 justify-between items-center'>
-                                <input type="text" value={comment} onChange={(e) => setComment(e.target.value)} placeholder='Write a comment' className='flex-1 h-[40px] bg-transparent border focus:outline-none px-2 font-[montserrat] border-[#3772ff] rounded-md py-2' />
+                                <input type="text" value={comment} onChange={(e) => setComment(e.target.value)} placeholder='Write a comment' className='flex-1 text-[#fafaf7] h-[40px] bg-transparent border focus:outline-none px-2 font-[montserrat] border-[#3772ff] rounded-md py-2' />
                                 <button type='submit' className='text-white h-[40px] w-[100px] rounded bg-[#3772ff] font-[poppins] font-medium text-lg flex justify-center items-center hover:bg-blue-700'>
                                     add
                                 </button>
@@ -293,7 +292,7 @@ function FullPost() {
                                                 <h3 className='font-[montserrat] text-sm text-white'>{dateFn(c.createdAt)}</h3>
                                             </div>
                                         </div>) :
-                                        <h1>No Comments</h1>
+                                        <h1 className='text-[#fafaf7]'>No Comments</h1>
                                 }
                             </div>
                         </div>

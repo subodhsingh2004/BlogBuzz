@@ -20,12 +20,8 @@ const postSlice = createSlice({
             sessionStorage.setItem("Post", JSON.stringify(action.payload))
         },
         addPosts: (state, action) => {
-            console.log(action.payload.post);
-            
             state.postsData.unshift(action.payload.post)
             sessionStorage.setItem("Post", JSON.stringify(state.postsData))
-            
-            console.log(state.postsData)
         },
         deletePost: (state, action) => {
             state.postsData = state.postsData.filter(p => p._id != action.payload)

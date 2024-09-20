@@ -24,7 +24,7 @@ function PostSection() {
     const [boxStatus, setBoxStatus] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    const [post, setPost] = useState([])
+    const [post, setPost] = useState(postFromSessionStorage)
 
     useEffect(() => {
         setPost(postFromSessionStorage)
@@ -48,12 +48,11 @@ function PostSection() {
                 console.log(error.response.data)
             }
         }
-    }, [isLogin])
+    }, [postFromSessionStorage])
 
     useEffect(() => {
         loadData();
-        // console.log("render");
-    }, [])
+    }, [isLogin])
 
     const filterdItems = post.filter(p => p.title.toLowerCase().includes(query.toLowerCase()))
 
@@ -85,7 +84,6 @@ function PostSection() {
 
                 {/* <SideBar /> */}
                 <Loader color={"#ffd400"} active={loading} />
-                <ComingSoonBox active={boxStatus} onClose={handleClose} />
             </div>
         </>
     )

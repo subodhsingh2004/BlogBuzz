@@ -50,14 +50,14 @@ function Signup() {
 
   return (
     <>
-      <div className='bg-[#121212] w-full h-[100vh] flex justify-center items-center'>
-        <div className='w-[400px] h-auto mx-auto flex flex-col justify-center items-center'>
+      <div className='bg-[#121212] w-full h-[100vh] flex justify-center'>
+        <div className='rounded-xl mt-20 w-[400px] h-auto mx-auto flex flex-col justify-center items-center'>
 
           <div className='w-[90%] flex justify-center'>
-            <h1 className='text-[30px] font-[montserrat] text-[#fff94f] font-bold text-center'>Signup</h1>
+            <h1 className='text-[30px] font-[montserrat] text-[#d7f9f7] font-bold text-center'>Signup</h1>
           </div>
 
-          <form onSubmit={handleSubmit} className='flex items-center justify-center flex-col w-[90%] h-full'>
+          <form onSubmit={handleSubmit} className='flex items-center flex-col w-[90%] h-full mt-8'>
 
             <label className='text-left w-full mb-2 text-[#fafaff] font-[montserrat] font-bold'>Name</label>
             <input type="text" placeholder='Enter Your Name' className='font-[poppins] text-[18px] w-full px-2 py-2 bg-transparent text-[#fafaff] rounded-md outline outline-[#3772ff] outline-1 mb-5' value={name} onChange={e => setName(e.target.value)} />

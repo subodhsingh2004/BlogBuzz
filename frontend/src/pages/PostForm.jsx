@@ -44,7 +44,6 @@ function PostForm({
                     }
                 }
             )
-            console.log(post.data);
             toast.success("post created successfully")
             setLoader(false)
             setActive(false)
