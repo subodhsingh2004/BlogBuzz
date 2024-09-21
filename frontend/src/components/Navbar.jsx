@@ -4,12 +4,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import { login, logout } from '../slices/AuthSlice';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import HomeRounded from '@mui/icons-material/HomeRounded';
+import AddCircleOutlineRounded from '@mui/icons-material/AddCircleOutlineRounded';
+import PostForm from '../pages/PostForm';
+
 
 function Navbar() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     // const [isOpen, setIsOpen] = useState(false)
+    const [popup, setpopup] = useState(false)
+
 
     // to check if user is login
     const isLogin = useSelector((state) => state.auth.status);
@@ -31,10 +38,10 @@ function Navbar() {
             // console.log()(error.response.data)
         }
     }
-    const handleClick = () => {
+    const handleLogoClick = () => {
         navigate('/')
     }
-    
+
     const handleLogout = async () => {
         const res = await axios.get('/api/v1/users/logout')
         toast.success(res.data.message)
@@ -46,45 +53,48 @@ function Navbar() {
         navigate(`/profile/${user.username}`)
     }
 
+    const handleClick = () => {
+        setpopup(true)
+    }
+
+    const handleClose = () => {
+        setpopup(false)
+    }
+
     return (
         <>
-            <nav className='w-full h-[8vh] fixed z-10 bg-transparent backdrop-blur-md bg-opacity-60 flex items-center justify-between px-3 sm:px-5 shadow-sm shadow-black border-b border-b-gray-500'>
+            <nav className='w-full h-[8vh] fixed z-10 bg-transparent backdrop-blur-md bg-opacity-60 flex items-center justify-between  px-3 sm:px-5 shadow-sm shadow-black border-b border-b-gray-500'>
 
+                <button onClick={handleLogoClick}><h1 className='text-[24px] sm:text-[32px] font-[poppins] font-bold text-[#fff94f] w-[10%]'> BlogBuzz </h1></button>
 
-                {
-                    isLogin ? <button className='hidden sm:flex flex-col text-red-600 text-[16px] sm:text-[20px]  font-[poppins] font-medium text-left'>
-                        <h4 className='text-white text-lg leading-5'>Welcome</h4>
-                        <Link to={`/profile/${user.username}`}>
-                            <h2 className='leading-4 text-[22px] text-[#3772ff]'>{user && user.username}</h2>
-                        </Link>
-                    </button>
-                        : null
-                }
-
-                <button onClick={handleClick}><h1 className='text-[24px] sm:text-[32px] font-[poppins] font-bold text-[#fff94f]'> BlogBuzz </h1></button>
+                <ul className='hidden md:flex w-full justify-center space-x-3 max-auto'>
+                    <Link to={"/"} className='flex bg-[#313131] py-1 px-2 space-x-1 rounded-md items-center'>
+                        <li><HomeRounded sx={{ color: "#d7f7f9", fontSize: "24px" }} /></li>
+                        <p className='leading-3 text-white'>Home</p>
+                    </Link>
+                    {isLogin ? <button onClick={handleClick} className='flex bg-[#313131] px-2 py-1 space-x-1 rounded-md items-center'>
+                        <li><AddCircleOutlineRounded sx={{ color: "#d7f7f9", fontSize: "24px" }} /></li>
+                        <p className='leading-3 text-white'>Add Post</p>
+                    </button> : null}
+                </ul>
 
                 {
                     isLogin ?
                         <div>
-                            <button onClick={handleProfileClick} className='sm:hidden text-[20px] bg-[#ffd400] text-[#011627] font-bold rounded-full w-[32px] h-[32px] flex justify-center items-center text-center font-[poppins]'><h2 className='mt-[2px]'>{user && user.username.charAt(0).toUpperCase()}</h2>
-                            </button>
+                            {/* <button onClick={handleProfileClick} className='sm:hidden text-[20px] bg-[#ffd400] text-[#011627] font-bold rounded-full w-[32px] h-[32px] flex justify-center items-center text-center font-[poppins]'><h2 className='mt-[2px]'>{user && user.username.charAt(0).toUpperCase()}</h2>
+                            </button> */}
 
-                            {/* {
-                                isOpen ?
-                                    <div className='duration-200 bg-[#011627] h-[100px] w-[120px] rounded-lg absolute right-1 top-[8vh]'>
-
-                                    </div> : null
-                            } */}
-
-                            <button onClick={handleLogout} className='hidden sm:block font-[montserrat] rounded-full font-medium bg-[#d7f9ff] px-4 py-1 text-black'>
-                                Logout
-                            </button>
+                            <button onClick={handleProfileClick}><AccountCircleRoundedIcon sx={{ color: "#d7f7f9", fontSize: "38px" }} /></button>
                         </div> : <button onClick={() => navigate('/login')} className='font-[montserrat] rounded-full font-medium bg-[#d7f9ff] px-4 py-1 text-black'>
                             Login
                         </button>
                 }
 
             </nav>
+
+            {
+                popup ? <PostForm active={true} setActive={setpopup} onClose={handleClose} /> : null
+            }
         </>
     )
 }

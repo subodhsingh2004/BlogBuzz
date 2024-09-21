@@ -86,8 +86,7 @@ function FullPost() {
     const handleLike = async () => {
 
         const likeStatus = !isLiked
-        isLiked ? setNumberOfLikes(prev => prev -= 1) : setNumberOfLikes(prev => prev += 1)
-        setIsLiked(likeStatus)
+
 
         try {
 
@@ -102,10 +101,15 @@ function FullPost() {
             )
 
             // to save changes
+            if (like) {
+                isLiked ? setNumberOfLikes(prev => prev -= 1) : setNumberOfLikes(prev => prev += 1)
+                setIsLiked(likeStatus)
+            }
 
 
         } catch (error) {
             console.log(error.response)
+            toast.error("Please Login to like a Post")
         }
     }
 
@@ -126,14 +130,14 @@ function FullPost() {
             )
 
             if (commentRes) {
-                setComment('');
                 loadPost()
                 toast.success(commentRes.data.message)
             }
         } catch (error) {
             console.log(error)
-            toast.error(error.response.data.error)
+            toast.error("Please Login to add comments")
         }
+        setComment('');
     }
 
     // Delete Post function

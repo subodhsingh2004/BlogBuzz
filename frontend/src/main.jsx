@@ -36,10 +36,7 @@ const router = createBrowserRouter(
           <Login />
         </AuthLayout>} />
 
-        <Route path='/post/:id' element={<AuthLayout authentication>
-          {" "}
-          <FullPost />
-        </AuthLayout>} />
+        <Route path='/post/:id' element={<FullPost />} />
 
         <Route path='/profile/:username' element={<AuthLayout authentication>
           {" "}
@@ -48,7 +45,7 @@ const router = createBrowserRouter(
 
         <Route path='/profile/page/:pageHeading' element={<AuthLayout authentication>
           {" "}
-          <UserPosts/>
+          <UserPosts />
         </AuthLayout>} />
 
       </Route>
@@ -61,12 +58,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
-      <ToastContainer 
-      hideProgressBar
-      position='top-center'
-      autoClose={2500}
-      transition={Slide}
-      theme='dark'/>
+      <ToastContainer
+        hideProgressBar
+        position='top-center'
+        autoClose={3000}
+        transition={Slide}
+        theme='dark' />
     </Provider>
   </React.StrictMode>,
 )
