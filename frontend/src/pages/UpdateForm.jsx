@@ -38,7 +38,7 @@ function UpdateForm({
             }
             
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             toast.error(error.response)
         }
 

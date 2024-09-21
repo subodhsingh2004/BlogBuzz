@@ -7,6 +7,7 @@ import axios from 'axios'
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import ComingSoonBox from '../components/ComingSoonBox'
 import { setPosts } from '../slices/PostsSlice'
+import { toast } from 'react-toastify'
 
 function PostSection() {
 
@@ -36,7 +37,7 @@ function PostSection() {
 
     const loadData = useCallback(async () => {
         if (post.length == 0) {
-            console.log("loaded")
+            // console.log("loaded")
             setLoading(true)
             try {
                 const items = await axios.get("/api/v1/posts/all-posts")
@@ -45,7 +46,8 @@ function PostSection() {
                 setLoading(false)
 
             } catch (error) {
-                console.log(error.response.data)
+                // console.log(error.response.data)
+                toast.error("Error in loading Posts")
             }
         }
     }, [postFromSessionStorage])
