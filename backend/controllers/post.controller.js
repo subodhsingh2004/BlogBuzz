@@ -142,7 +142,7 @@ const likePost = asyncHandler(async function (req, res) {
 
     user.save({ validateBeforeSave: true });
 
-    return res.status(200).json(post.likes)
+    return res.status(200).json(post)
 
 })
 

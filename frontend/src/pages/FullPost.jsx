@@ -12,7 +12,7 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import { toast } from 'react-toastify'
 import { parseISO, formatDistanceToNow } from 'date-fns';
 import UpdateForm from './UpdateForm'
-import { deletePost } from '../slices/PostsSlice'
+import { deletePost, updatePost } from '../slices/PostsSlice'
 
 
 function FullPost() {
@@ -43,7 +43,7 @@ function FullPost() {
 
     // logged in user details
     const user = useSelector((state => state.auth.userData))
-    // console.log()(user.name);
+    console.log(user);
 
     // get post
     const loadPost = useCallback(async () => {
@@ -85,8 +85,15 @@ function FullPost() {
     // Like function
     const handleLike = async () => {
 
+        if (user == []) {
+            toast.error("Please Login to like Post")
+            return
+        }
+
         const likeStatus = !isLiked
 
+        isLiked ? setNumberOfLikes(prev => prev -= 1) : setNumberOfLikes(prev => prev += 1)
+        setIsLiked(likeStatus)
 
         try {
 
@@ -99,17 +106,13 @@ function FullPost() {
                     }
                 }
             )
-
-            // to save changes
             if (like) {
-                isLiked ? setNumberOfLikes(prev => prev -= 1) : setNumberOfLikes(prev => prev += 1)
-                setIsLiked(likeStatus)
+                dispatch(updatePost({ post: like.data, id: user._id }))
             }
 
-
         } catch (error) {
-            console.log(error.response)
-            toast.error("Please Login to like a Post")
+            console.log(error)
+            toast.error("Login to like a Post")
         }
     }
 
