@@ -37,7 +37,7 @@ function Login() {
             
         } catch (error) {
             setLoader(false)
-            console.log(error.response.data)
+            // console.log(error.response.data)
             toast.error(error.response.data.error)
         }
     }

@@ -24,10 +24,6 @@ function SideBar() {
         <>
             {isLogin ?
                 <>
-                    {/* <button onClick={handleClick} className='hidden duration-200 border-[2px] border-blue-700 h-[40px] fixed bottom-5 cursor-pointer z-10 left-3 rounded-full w-auto px-2 bg-[#dcdcdc] md:flex justify-center items-center font-[montserrat] font-medium hover:bg-[#bdbbbb]'>Write a Post </button> */}
-                    {/* <h2 className='text-white font-[montserrat]'>Wanna write a Post ?</h2>
-                        <button onClick={handleClick} className='bg-[#ffd400] px-2 rounded-full py-1 font-[poppins] text-sm text-[#011627] font-bold'>Click Here</button> */}
-
                     <div className='sm:hidden fixed bottom-0 h-[55px] bg-[#fafaf7] border-t border-t-[#fff94f] backdrop-blur-md bg-opacity-5 flex w-full justify-center items-center rounded-t-3xl'>
                         <div className='mx-auto flex px-4 justify-evenly items-center bottom-2 z-10 w-full space-x-5  h-[45px] rounded-full '>
                             <NavLink to={'/'}>

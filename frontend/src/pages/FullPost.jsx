@@ -111,7 +111,7 @@ function FullPost() {
             }
 
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             toast.error("Login to like a Post")
         }
     }
@@ -137,7 +137,7 @@ function FullPost() {
                 toast.success(commentRes.data.message)
             }
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             toast.error("Please Login to add comments")
         }
         setComment('');
@@ -160,7 +160,7 @@ function FullPost() {
                 toast.success("Deleted Successfully")
             }
         } catch (error) {
-            console.log(error)
+            // console.log(error)
         }
     }
 
