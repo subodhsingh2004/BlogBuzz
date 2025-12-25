@@ -26,10 +26,13 @@ const router = createBrowserRouter(
         <Route path='' element={<App />} />
 
         <Route path='/signup'
-          element={<AuthLayout authentication={false}>
-            {" "}
-            <Signup />
-          </AuthLayout>} />
+          element={
+            <AuthLayout authentication={false}>
+              {" "}
+              <Signup />
+            </AuthLayout>
+          }
+        />
 
         <Route path='/login' element={<AuthLayout authentication={false}>
           {" "}
