@@ -15,10 +15,8 @@ function PostSection() {
 
     const isLogin = useSelector(state => state.auth.status)
     const postFromSessionStorage = useSelector(state => state.posts.postsData)
-    // console.log(postFromSessionStorage);
 
 
-    // console.log(isLogin);
 
     const [query, setQuery] = useState('')
 
@@ -32,12 +30,10 @@ function PostSection() {
     }, [postFromSessionStorage])
 
     // const img = "/images/img1.png"
-    // console.log(post);
 
 
     const loadData = useCallback(async () => {
         if (post.length == 0) {
-            // console.log("loaded")
             setLoading(true)
             try {
                 const items = await axios.get("/api/v1/posts/all-posts")
@@ -46,7 +42,6 @@ function PostSection() {
                 setLoading(false)
 
             } catch (error) {
-                // console.log(error.response.data)
                 toast.error("Error in loading Posts")
             }
         }
@@ -58,7 +53,6 @@ function PostSection() {
 
     const filterdItems = post.filter(p => p.title.toLowerCase().includes(query.toLowerCase()))
 
-    // console.log(handleSearch())
 
     const handleClose = () => {
         setBoxStatus(false)

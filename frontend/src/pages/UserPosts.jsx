@@ -15,7 +15,6 @@ function UserPosts() {
     const loadLikePostsInfo = async () => {
         try {
             const response = await axios.get('/api/v1/users/get-liked-posts')
-            // console.log(response.data.likedPosts);
 
             setPostsInfo(response.data.likedPosts)
         } catch (error) {
@@ -26,7 +25,6 @@ function UserPosts() {
     const loadMyPostsInfo = async () => {
         try {
             const response = await axios.get('/api/v1/users/get-my-posts')
-            // console.log(response.data.likedPosts);
 
             setPostsInfo(response.data.posts)
         } catch (error) {

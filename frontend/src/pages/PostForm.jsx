@@ -31,7 +31,6 @@ function PostForm({
         formData.append("author", userId)
         formData.append('file', image);
 
-        // console.log(image);
 
 
         try {
@@ -50,14 +49,12 @@ function PostForm({
             dispatch(addPosts(post.data))
 
         } catch (error) {
-            // console.log(error.response.data)
             toast.error(error)
         }
 
     }
 
     const handleFile = (e) => {
-        // console.log(e.target.files[0])
         setImage(e.target.files[0])
         setButtonDisabled(false)
 

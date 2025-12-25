@@ -11,7 +11,6 @@ function Profile() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const user = useSelector((state) => state.auth.userData)
-  // console.log(user)
 
   const [userDetails, setUserDetails] = useState()
 
